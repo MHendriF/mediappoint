@@ -74,8 +74,11 @@ const RegisterForm = ({ user }: { user: User }) => {
         identificationDocument: values.identificationDocument ? formData : undefined,
         privacyConsent: values.privacyConsent,
       };
+      console.log("🚀 ~ onSubmit ~ patient:", patient);
 
+      // @ts-ignore
       const newPatient = await registerPatient(patient);
+      console.log("🚀 ~ onSubmit ~ newPatient:", newPatient);
 
       if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`);
@@ -295,7 +298,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Identification and Verfication</h2>
+            <h2 className="sub-header">Identification and Verification</h2>
           </div>
 
           <CustomFormField
@@ -349,16 +352,14 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="disclosureConsent"
-            label="I consent to the use and disclosure of my health
-            information for treatment purposes."
+            label="I consent to the use and disclosure of my health information for treatment purposes."
           />
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="privacyConsent"
-            label="I acknowledge that I have reviewed and agree to the
-            privacy policy"
+            label="I acknowledge that I have reviewed and agree to the privacy policy."
           />
         </section>
 
