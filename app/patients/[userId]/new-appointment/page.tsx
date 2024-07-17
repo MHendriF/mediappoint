@@ -5,6 +5,8 @@ import { getPatient } from "@/lib/actions/patient.actions";
 
 const Appointment = async ({ params: { userId } }: SearchParamProps) => {
   const patient = await getPatient(userId);
+  console.log("🚀 ~ Appointment ~ userId:", userId);
+  console.log("🚀 ~ Appointment ~ patient:", patient);
 
   return (
     <div className="flex h-screen max-h-screen">

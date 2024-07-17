@@ -48,8 +48,11 @@ export const AppointmentForm = ({
     },
   });
 
+  console.log(`🚀 patientId: ${patientId}`);
+
   const onSubmit = async (values: z.infer<typeof AppointmentFormValidation>) => {
     setIsLoading(true);
+    console.log("🚀 ~ onSubmit ~ values:", values);
 
     let status;
     switch (type) {
@@ -63,6 +66,8 @@ export const AppointmentForm = ({
         status = "pending";
     }
 
+    console.log(`🚀 ~ onSubmit ~ type:${type} ~ patientId: ${patientId}`);
+
     try {
       if (type === "create" && patientId) {
         const appointment = {
@@ -74,8 +79,10 @@ export const AppointmentForm = ({
           status: status as Status,
           note: values.note,
         };
+        console.log("🚀 ~ onSubmit ~ appointment:", appointment);
 
         const newAppointment = await createAppointment(appointment);
+        console.log("🚀 ~ onSubmit ~ createAppointment:", createAppointment);
 
         if (newAppointment) {
           form.reset();
@@ -116,7 +123,7 @@ export const AppointmentForm = ({
       buttonLabel = "Schedule Appointment";
       break;
     default:
-      buttonLabel = "Submit Apppointment";
+      buttonLabel = "Submit Appointment";
   }
 
   return (
@@ -169,7 +176,7 @@ export const AppointmentForm = ({
                 control={form.control}
                 name="reason"
                 label="Appointment reason"
-                placeholder="Annual montly check-up"
+                placeholder="Annual monthly check-up"
                 disabled={type === "schedule"}
               />
 

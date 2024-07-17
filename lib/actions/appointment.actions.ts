@@ -17,10 +17,12 @@ export const createAppointment = async (appointment: CreateAppointmentParams) =>
       ID.unique(),
       appointment
     );
+    console.log("🚀 ~ createAppointment ~ newAppointment:", newAppointment);
 
     revalidatePath("/admin");
     return parseStringify(newAppointment);
   } catch (error) {
+    console.log("🚀 ~ createAppointment ~ error:", error);
     console.error("An error occurred while creating a new appointment:", error);
   }
 };
